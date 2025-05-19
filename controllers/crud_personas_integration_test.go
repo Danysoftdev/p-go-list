@@ -22,6 +22,7 @@ import (
 	"github.com/danysoftdev/p-go-list/services"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func TestEndpointsControllerIntegration(t *testing.T) {
