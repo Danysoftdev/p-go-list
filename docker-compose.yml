@@ -1,0 +1,25 @@
+services:
+  list-service:
+    image: danysoftdev/p-go-list:latest
+    container_name: microservicio-list
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "8083:8080"
+    networks:
+      - parcial_go_mongo_net
+
+  tester:
+    image: curlimages/curl
+    depends_on:
+      - list-service
+    networks:
+      - parcial_go_mongo_net
+    entrypoint: [ "sh", "-c", "sleep 15 && curl -s --fail http://list-service:8080 || exit 1" ]
+    profiles:
+      - test
+
+networks:
+  parcial_go_mongo_net:
+    external: true
