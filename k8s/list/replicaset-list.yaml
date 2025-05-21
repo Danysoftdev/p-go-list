@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: list-replicaset
+  namespace: p-go-list
+  labels:
+    app: list-persona
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: list-persona
+  template:
+    metadata:
+      labels:
+        app: list-persona
+    spec:
+      nodeSelector:
+        workload: list
+      containers:
+        - name: list-container
+          image: danysoftdev/p-go-list:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: mongo-list-secret

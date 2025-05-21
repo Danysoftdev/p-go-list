@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: list-service
+  namespace: p-go-list
+  labels:
+    app: list-persona
+spec:
+  selector:
+    app: list-persona
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8080
+  type: ClusterIP
